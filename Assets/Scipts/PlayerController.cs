@@ -5,13 +5,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference movement;
     [Header("References")]
     private CharacterController controller;
+    private Animator animator;
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 5.0F;
+    [SerializeField] private float rotateSpeed = 0.3F;
     [Header("Input")]
     private Vector2 moveDirection;
     private void Start()
     {
+        Transform childTransform = transform.Find("Walking");
+        GameObject childGameObject = childTransform.gameObject;
         controller = GetComponent<CharacterController>();
+        animator = childGameObject.GetComponent<Animator>();
         movement.action.Enable();
     }
 
@@ -19,6 +24,12 @@ public class PlayerController : MonoBehaviour
     {
         InputManagement();
         Movement();
+
+        //Animations
+        if(moveDirection == Vector2.zero)
+        animator.SetFloat("Speed", 0);
+        else
+        animator.SetFloat("Speed", 1);
     }
 
     private void Movement(){
@@ -26,14 +37,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void GroundMovement() {
-        transform.Rotate(0, moveDirection.x * 0.5F, 0);
+        transform.Rotate(0, moveDirection.x * rotateSpeed, 0);
         var forward = transform.TransformDirection(Vector3.forward);
-        float curSpeed = 5.0F * moveDirection.y;
+        float curSpeed = walkSpeed * moveDirection.y;
         controller.SimpleMove(forward * curSpeed);
-        // Vector3 move = new Vector3(moveDirection.x, 0, moveDirection.y);
-        // move.y = 0;
-        // move *= walkSpeed;
-        // controller.Move(move * Time.deltaTime);
     }
 
     private void InputManagement()
