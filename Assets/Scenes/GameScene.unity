@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 321409344}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -597,6 +597,7 @@ MonoBehaviour:
   attack: {fileID: -6585040797261289467, guid: 50468f251f277fc42a4da88413bb7095, type: 3}
   walkSpeed: 5
   rotateSpeed: 0.3
+  detectionRadius: 4
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
