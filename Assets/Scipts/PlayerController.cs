@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("Input")]
     private Vector2 moveDirection;
     private GameObject closestEnemy;
+    [Header("Public")]
+    public bool inCombat = false;
     private void Start()
     {
         Transform childTransform = transform.Find("Walking");
@@ -110,10 +112,12 @@ public class PlayerController : MonoBehaviour
         if (closestEnemy != null)
         {
             Debug.Log("Found closest enemy in front: " + closestEnemy.name + " at distance: " + closestDistance);
-        }
-        else
-        {
-            Debug.Log("No enemies within detection radius and in front of player");
+            var enemyCombat = closestEnemy.GetComponent<EnemyAI>();
+            if (enemyCombat)
+            {
+                enemyCombat.inCombat = true;
+                inCombat = true;
+            }
         }
     }
 }
