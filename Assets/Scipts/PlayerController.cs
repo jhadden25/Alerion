@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private InputActionReference movement;
+    [SerializeField] private InputActionReference movement, attack;
     [Header("References")]
     private CharacterController controller;
     private Animator animator;
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = childGameObject.GetComponent<Animator>();
         movement.action.Enable();
+        attack.action.Enable();
     }
 
     private void Update()
@@ -46,5 +47,15 @@ public class PlayerController : MonoBehaviour
     private void InputManagement()
     {
         moveDirection = movement.action.ReadValue<Vector2>();
+        
+        // Check if attack button is pressed and set Punching parameter
+        if (attack.action.WasPressedThisFrame())
+        {
+            animator.SetBool("Punching", true);
+        }
+        else if (attack.action.WasReleasedThisFrame())
+        {
+            animator.SetBool("Punching", false);
+        }
     }
 }
