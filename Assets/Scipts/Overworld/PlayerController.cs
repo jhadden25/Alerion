@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 5.0F;
     [SerializeField] private float rotateSpeed = 0.3F;
     [Header("Combat")]
-    [SerializeField] private float detectionRadius = 10.0F;
+    [SerializeField] private float detectionRadius = 4.0F;
     [Header("Input")]
     private Vector2 moveDirection;
     private GameObject closestEnemy;
