@@ -1,40 +1,48 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class PlayerBattleController : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private TextMeshProUGUI playerHealthText;
     private Animator animator;
-    public bool playerTurn = true;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool isPlayerTurn = true;
+    public int currentHealth = 20;
+
     void Start()
     {
         Transform childTransform = transform.Find("Walking");
         GameObject childGameObject = childTransform.gameObject;
         animator = childGameObject.GetComponent<Animator>();
-
     }
 
-    // Update is called once per frame
     void Update()
     {
+        playerHealthText.text = $"{currentHealth}";
+    }
 
+    public void Defend(int damage, string damageType)
+    {
+        currentHealth -= damage;
     }
 
     public void Attack()
     {
-        if (playerTurn)
-            StartCoroutine(AttackAnimation());
+        if (isPlayerTurn)
+            StartCoroutine(PlayAttackAnimation());
     }
 
-    private IEnumerator AttackAnimation()
+    private IEnumerator PlayAttackAnimation()
     {
         animator.SetBool("Punching", true);
         yield return new WaitForSeconds(1f);
         animator.SetBool("Punching", false);
-        playerTurn = false;
+
+        isPlayerTurn = false;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        enemies[0].GetComponent<EnemyBattleController>().enemyTurn = true;
-        enemies[0].GetComponent<EnemyBattleController>().Attack();
+        enemies[0].GetComponent<EnemyBattleController>().Defend(5, "physical");
+        enemies[0].GetComponent<EnemyBattleController>().isEnemyTurn = true;
     }
 }
+
