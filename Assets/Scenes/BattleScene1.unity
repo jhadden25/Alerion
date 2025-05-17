@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 321409342}
   - component: {fileID: 321409341}
   - component: {fileID: 321409340}
+  - component: {fileID: 321409344}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Enemy
@@ -230,6 +231,19 @@ Transform:
   - {fileID: 549491280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -172.83, z: 0}
+--- !u!114 &321409344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321409339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df23cbea6a97884484ff5894e26b982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTurn: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6142f6003b8bfad4aa3eaea5c46d355f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTurn: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
