@@ -115,8 +115,10 @@ public class PlayerController : MonoBehaviour
             var enemyCombat = closestEnemy.GetComponent<EnemyAI>();
             if (enemyCombat)
             {
+                //Unused variables
                 enemyCombat.inCombat = true;
                 inCombat = true;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("BattleScene1");
             }
         }
     }
